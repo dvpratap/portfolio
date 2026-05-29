@@ -1,0 +1,95 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+  <h3>Send Me a Message</h3>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    <span class="alert-icon">✓</span>
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-error">
+    <span class="alert-icon">!</span>
+    {{ errorMessage }}
+  </div>
+
+  <!-- Name Field -->
+  <div class="form-group">
+    <label for="name">Name *</label>
+    <input
+      type="text"
+      id="name"
+      formControlName="name"
+      class="form-control"
+      [class.is-invalid]="submitted && f['name'].errors"
+      placeholder="Your name"
+    />
+    <div *ngIf="submitted && f['name'].errors" class="error-message">
+      <span *ngIf="f['name'].errors['required']">Name is required</span>
+      <span *ngIf="f['name'].errors['minlength']">Name must be at least 2 characters</span>
+    </div>
+  </div>
+
+  <!-- Email Field -->
+  <div class="form-group">
+    <label for="email">Email *</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      class="form-control"
+      [class.is-invalid]="submitted && f['email'].errors"
+      placeholder="your.email@example.com"
+    />
+    <div *ngIf="submitted && f['email'].errors" class="error-message">
+      <span *ngIf="f['email'].errors['required']">Email is required</span>
+      <span *ngIf="f['email'].errors['email']">Please enter a valid email</span>
+    </div>
+  </div>
+
+  <!-- Subject Field -->
+  <div class="form-group">
+    <label for="subject">Subject *</label>
+    <input
+      type="text"
+      id="subject"
+      formControlName="subject"
+      class="form-control"
+      [class.is-invalid]="submitted && f['subject'].errors"
+      placeholder="Collaboration, Opportunity, Question..."
+    />
+    <div *ngIf="submitted && f['subject'].errors" class="error-message">
+      <span *ngIf="f['subject'].errors['required']">Subject is required</span>
+      <span *ngIf="f['subject'].errors['minlength']">Subject must be at least 3 characters</span>
+    </div>
+  </div>
+
+  <!-- Message Field -->
+  <div class="form-group">
+    <label for="message">Message *</label>
+    <textarea
+      id="message"
+      formControlName="message"
+      class="form-control"
+      [class.is-invalid]="submitted && f['message'].errors"
+      rows="5"
+      placeholder="Tell me about your project, opportunity, or question..."
+    ></textarea>
+    <div *ngIf="submitted && f['message'].errors" class="error-message">
+      <span *ngIf="f['message'].errors['required']">Message is required</span>
+      <span *ngIf="f['message'].errors['minlength']">Message must be at least 10 characters</span>
+    </div>
+  </div>
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="btn-submit"
+    [disabled]="loading"
+  >
+    <span *ngIf="!loading" class="btn-text">Send Message</span>
+    <span *ngIf="loading" class="btn-text loading">
+      <span class="spinner"></span> Sending...
+    </span>
+  </button>
+</form>
