@@ -11,4 +11,13 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'Dev Pratap Singh Rajawat - Full Stack Developer';
+  mobileMenuOpen = false;
+
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.mobileMenuOpen = false;
+  }
 }
